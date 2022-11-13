@@ -1,6 +1,4 @@
 package com.app.Controllers;
-
-
 import com.app.Services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,12 +34,4 @@ public class AuthController {
         }
     }
 
-    public void checkToken(String email, String Token) {
-        if(Token==null || Token.isEmpty())
-        {
-            System.out.println("Login failed."+"The token is null or empty.\n You must login first to get a valid token.");
-            return;
-        }
-        authService.checkToken(email, Token);
-    }
 }

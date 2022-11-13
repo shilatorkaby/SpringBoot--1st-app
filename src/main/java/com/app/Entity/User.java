@@ -10,13 +10,13 @@ public class User {
     private String name;
     private String password;
 
+
     public User(String email, String name, String password) {
         this.id = getRandomId();
         this.email = email;
         this.name = name;
         this.password = password;
     }
-
     public User(int id, String email, String name, String password) {
         this.id = id;
         this.email = email;

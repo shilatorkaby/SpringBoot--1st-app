@@ -27,7 +27,9 @@ public class UserRepository {
     public void addNewUser(User user) {
         int userId = user.getId();
         try {
-            gson.toJson(user,new FileWriter(PATH + "\\User" + userId));
+            Writer writer = new FileWriter(PATH + "\\User" + userId+".txt");
+            new Gson().toJson(user, writer);
+            writer.close();
             usersByEmails.put(user.getEmail(), user);
             //logger.info("file created");
         } catch (IOException e) {
@@ -44,7 +46,7 @@ public class UserRepository {
 
 
     public User getUserById(int id) {
-        File userJsonFile = new File(PATH + "User" + id);
+        File userJsonFile = new File(PATH + "User" + id+".txt");
         FileReader fileReader;
         if (!userJsonFile.exists()) {
             System.out.println("User " + id + "does not exist");
@@ -53,15 +55,13 @@ public class UserRepository {
         try {
             fileReader = new FileReader(userJsonFile);
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);  //will never occur
+            throw new RuntimeException(e);
         }
         return gson.fromJson(fileReader, User.class);
     }
 
     public User getUserByEmail(String email) {
-        User user=usersByEmails.get(email);
-        return user;
-
+        return(usersByEmails.get(email));
     }
 
 
